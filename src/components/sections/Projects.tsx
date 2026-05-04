@@ -7,7 +7,7 @@ const projects = [
   {
     title: "Web-based CV Portfolio",
     category: "Development & Design",
-    image: "/project_cv_1777921746961.png",
+    image: "/webcv.png",
     link: "#",
     additions: "React, Next.js, GSAP",
   },
