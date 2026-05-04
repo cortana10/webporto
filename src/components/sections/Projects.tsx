@@ -26,11 +26,11 @@ const projects = [
     additions: "UI/UX, Frontend",
   },
   {
-    title: "Bengkel IMS",
+    title: "Bengkel Inventory Management System",
     category: "Dashboard Application",
     image: "/ims.png",
-    link: "#",
-    additions: "React, Google Apps Script",
+    link: "https://script.google.com/macros/s/AKfycbyQsOzt_-uvdhaiuBSutRaC_sQV74sZeusyUC8inFZ3iqY_9qMHiTWYZH3y8wR4Q5k2/exec",
+    additions: "IMS Dashboard, Google Apps Script",
   },
 ];
 
