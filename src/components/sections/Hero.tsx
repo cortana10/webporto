@@ -123,12 +123,14 @@ export default function Hero() {
         transition={{ delay: 3, duration: 1 }}
         className="absolute bottom-10 z-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-sm uppercase tracking-widest text-white/50">Scroll to explore</span>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[1px] h-12 bg-accent/50"
-        />
+        <span className="text-xs text-white/50 uppercase tracking-[0.2em]">SCROLL</span>
+        <div className="w-px h-10 bg-white/20 relative overflow-hidden">
+          <motion.div
+            animate={{ y: ["-100%", "200%"] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-full h-1/2 bg-white"
+          />
+        </div>
       </motion.div>
     </section>
   );

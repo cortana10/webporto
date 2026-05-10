@@ -10,13 +10,13 @@ export default function Preloader() {
   useEffect(() => {
     // Prevent scrolling while loading
     document.body.style.overflow = "hidden";
-    
+
     // Fixed delay to show the animation, can be tied to actual window.onload if needed
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = "auto";
     }, 2500);
-    
+
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = "auto";
@@ -38,16 +38,16 @@ export default function Preloader() {
             transition={{ duration: 0.5 }}
             className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.3)] bg-white/5 border border-accent/50 mb-8"
           >
-            <Image 
-              src="/profile.png" 
-              alt="Loading Profile" 
+            <Image
+              src="/profile.png"
+              alt="Loading Profile"
               fill
               className="object-cover"
               priority
             />
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -55,7 +55,7 @@ export default function Preloader() {
           >
             <div className="text-white/80 font-mono text-sm tracking-widest uppercase">Loading Experience</div>
             <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-              <motion.div 
+              <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 2, ease: "easeInOut" }}

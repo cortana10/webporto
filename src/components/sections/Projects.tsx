@@ -1,119 +1,158 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
-const projects = [
+const projectsData = [
   {
-    title: "Web-based CV Portfolio",
+    id: "01",
+    url: "https://rhaka-cv.netlify.app",
+    name: "Web Portfolio",
     category: "Development & Design",
-    image: "/project_cv_1777921746961.png",
-    link: "#",
-    additions: "React, Next.js, GSAP",
+    images: {
+      leftTop: "/certification.png",
+      leftBottom: "/competencies.png",
+      right: "/webcv.png"
+    }
   },
   {
-    title: "Aldi's Burger - Sizzle & Flame",
+    id: "02",
+    url: "https://aldisburgerdemo.netlify.app",
+    name: "Aldi's Burger - Sizzle & Flame",
+    category: "Food Brand Landing Page",
+    images: {
+      leftTop: "/burger.png",
+      leftBottom: "/burger.png",
+      right: "/burger.png"
+    }
+  },
+  {
+    id: "03",
+    url: "https://journeytowest.netlify.app",
+    name: "Premium Umrah Travel",
     category: "Landing Page",
-    image: "/burger.png",
-    link: "https://aldisburgerdemo.netlify.app/",
-    additions: "Tailwind, Framer Motion",
+    images: {
+      leftTop: "/jtw.png",
+      leftBottom: "/jtw.png",
+      right: "/jtw.png"
+    }
   },
   {
-    title: "Premium Umrah Travel",
-    category: "Landing Page",
-    image: "/jtw.png",
-    link: "https://journeytowest.netlify.app/",
-    additions: "UI/UX, Frontend",
-  },
-  {
-    title: "Bengkel IMS",
-    category: "Dashboard Application",
-    image: "/ims.png",
-    link: "#",
-    additions: "React, Google Apps Script",
-  },
+    id: "04",
+    url: "https://script.google.com/macros/s/AKfycbyQsOzt_-uvdhaiuBSutRaC_sQV74sZeusyUC8inFZ3iqY_9qMHiTWYZH3y8wR4Q5k2/exec",
+    name: "Bengkel Inventory Management System",
+    category: "Dashbaord Application",
+    images: {
+      leftTop: "/ims.png",
+      leftBottom: "/ims.png",
+      right: "/ims.png"
+    }
+  }
 ];
 
 export default function Projects() {
-  const [activeId, setActiveId] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
   return (
-    <section className="w-full py-32 bg-background relative z-20 border-t border-white/5">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-12 mb-16">
-        <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">Featured Projects</h2>
-        <div className="w-12 h-1 bg-accent mb-12"></div>
+    <section
+      ref={containerRef}
+      className="relative bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 w-full"
+    >
+      <div className="pt-24 md:pt-32 pb-12 max-w-[1400px] mx-auto text-center">
+        <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent hero-heading">
+          Project
+        </h2>
+      </div>
 
-        {/* Accordion Slider */}
-        <div className="flex h-[500px] md:h-[600px] w-full lg:w-[70vw] lg:max-w-[1000px] mx-auto">
-          {projects.map((project, index) => {
-            const isActive = activeId === index;
-
-            return (
-              <div
-                key={index}
-                onClick={() => setActiveId(index)}
-                className={`relative overflow-hidden cursor-pointer bg-white/5 transition-all duration-[500ms] ease-[cubic-bezier(0.05,0.60,0.39,0.94)] mr-2 md:mr-4 last:mr-0 ${isActive
-                    ? "flex-[8] md:flex-[9] rounded-[2rem] shadow-[0.3rem_0.3rem_0.4rem_rgba(0,0,0,0.3)]"
-                    : "flex-[1] rounded-[3rem] hover:shadow-[0.7rem_0.7rem_0.5rem_rgba(0,0,0,0.3)] min-w-[60px] md:min-w-[80px]"
-                  }`}
-              >
-                {/* Background Image */}
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-
-                {/* Overlay gradient for readability */}
-                <div
-                  className={`absolute inset-0 transition-opacity duration-500 ${isActive ? "bg-black/40" : "bg-black/60"
-                    }`}
-                />
-
-                {/* Content Container (only visible when active) */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Top Text (Title Card) */}
-                  <div
-                    className={`absolute top-6 left-6 md:top-8 md:left-8 flex flex-col text-white transition-all duration-[290ms] ease-[cubic-bezier(0.05,0.60,0.42,0.94)] delay-300 pointer-events-auto w-max ${isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-                      }`}
-                  >
-                    <span className="text-xs md:text-sm text-accent font-semibold uppercase tracking-widest mb-1 md:mb-2">
-                      {project.category}
-                    </span>
-                    <h1 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight drop-shadow-lg max-w-[200px] md:max-w-md break-words whitespace-normal">
-                      {project.title}
-                    </h1>
-                  </div>
-
-                  {/* Bottom Text (Card Title / Actions) */}
-                  <div
-                    className={`absolute bottom-6 left-6 md:bottom-8 md:left-8 flex flex-col text-white transition-all duration-[290ms] ease-[cubic-bezier(0.05,0.62,0.40,0.95)] delay-300 pointer-events-auto ${isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-                      }`}
-                  >
-                    <span className="text-xs md:text-sm text-white/80 font-light tracking-wider mb-3">
-                      {project.additions}
-                    </span>
-
-                    <a
-                      href={project.link}
-                      target={project.link !== "#" ? "_blank" : "_self"}
-                      rel="noreferrer"
-                      className="inline-block px-5 py-2 md:px-6 md:py-3 border border-white/50 hover:border-accent hover:bg-accent hover:text-black transition-colors rounded-full text-xs md:text-sm font-semibold uppercase tracking-widest w-fit"
-                      onClick={(e) => {
-                        // Prevent triggering the card expansion when clicking the link
-                        if (!isActive) e.preventDefault();
-                      }}
-                    >
-                      View Project
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+      <div className="px-4 pb-24 md:pb-32 max-w-[1200px] mx-auto">
+        {projectsData.map((project, i) => {
+          const targetScale = 1 - ((projectsData.length - 1 - i) * 0.03);
+          return (
+            <Card
+              key={i}
+              i={i}
+              project={project}
+              progress={scrollYProgress}
+              range={[i * (1 / projectsData.length), 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
       </div>
     </section>
   );
 }
+
+const Card = ({
+  project,
+  i,
+  progress,
+  range,
+  targetScale
+}: {
+  project: any;
+  i: number;
+  progress: MotionValue<number>;
+  range: [number, number];
+  targetScale: number;
+}) => {
+  // Scale down when scroll passes its range
+  const scale = useTransform(progress, range, [1, targetScale]);
+
+  return (
+    <div
+      className="sticky flex flex-col justify-start"
+      style={{
+        top: `calc(6rem + ${i * 28}px)`, // 6rem approx top-24
+        paddingBottom: "10vh"
+      }}
+    >
+      <motion.div
+        style={{ scale }}
+        className="relative flex flex-col w-full h-[85vh] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 transform-gpu origin-top"
+      >
+        {/* Top Row */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 shrink-0">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <span className="text-5xl sm:text-6xl md:text-7xl font-bold text-white/20 leading-none">{project.id}</span>
+            <div>
+              <div className="text-[#D7E2EA]/60 text-xs sm:text-sm uppercase tracking-widest mb-1">{project.category}</div>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{project.name}</h3>
+            </div>
+          </div>
+          <button
+            onClick={() => window.open(project.url, "_blank")}
+            className="rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] font-medium uppercase tracking-widest px-6 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm hover:bg-[#D7E2EA]/10 transition-colors whitespace-nowrap">
+            Live Project
+          </button>
+        </div>
+
+        {/* Bottom Row - Images */}
+        <div className="flex-1 flex gap-2 sm:gap-4 overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] min-h-0">
+          {/* Left Column */}
+          <div className="w-[40%] flex flex-col gap-2 sm:gap-4 h-full">
+            <div
+              className="relative w-full rounded-[24px] sm:rounded-[30px] md:rounded-[40px] overflow-hidden shrink-0"
+              style={{ height: "clamp(130px, 16vw, 230px)" }}
+            >
+              <Image src={project.images.leftTop} alt={`${project.name} preview`} fill className="object-cover" />
+            </div>
+            <div className="relative w-full flex-1 rounded-[24px] sm:rounded-[30px] md:rounded-[40px] overflow-hidden">
+              <Image src={project.images.leftBottom} alt={`${project.name} preview`} fill className="object-cover" />
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="w-[60%] relative rounded-[24px] sm:rounded-[30px] md:rounded-[40px] overflow-hidden h-full">
+            <Image src={project.images.right} alt={`${project.name} full preview`} fill className="object-cover" />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
