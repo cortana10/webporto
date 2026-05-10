@@ -42,7 +42,7 @@ const projectsData = [
     id: "04",
     url: "https://script.google.com/macros/s/AKfycbyQsOzt_-uvdhaiuBSutRaC_sQV74sZeusyUC8inFZ3iqY_9qMHiTWYZH3y8wR4Q5k2/exec",
     name: "Bengkel Inventory Management System",
-    category: "Dashbaord Application",
+    category: "Dashboard Application",
     images: {
       leftTop: "/ims.png",
       leftBottom: "/ims.png",
